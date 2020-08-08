@@ -16,7 +16,9 @@ Function Get-Greeting {
 
     .LINK
         https://github.com/mjonescase/HelloPowershell
+
     #>
     [cmdletbinding()]
+    Param()
     "Hello World!"
 }

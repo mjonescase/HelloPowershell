@@ -20,7 +20,9 @@ InModuleScope 'PSDeploy' {
         Context 'Gets Greeting' {
 
             It 'Gets the greeting' {
-                Get-Greeting | Should Be "Hello World!"
+                $ENV:BHProjectPath | Should Be "C:\Users\micha\git\HelloPowershell"
+                $ENV:BHProjectName | Should Be "HelloPowershell"
+                # Get-Greeting | Should Be "Hello World!"
             }
         }
     }
