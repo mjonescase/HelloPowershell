@@ -7,7 +7,7 @@
     ModuleVersion = '0.1.0'
 
     # ID used to uniquely identify this module
-    GUID = 'TODO-get-one-of-these'
+    GUID = 'b4007b97-817d-4d8a-9944-d9bf822fc17e' # TODO actually get one of these
 
     # Author of this module
     Author = 'Mike Jones'
