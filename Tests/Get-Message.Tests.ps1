@@ -8,7 +8,6 @@ Remove-Module $ENV:BHProjectName -ErrorAction SilentlyContinue
 
 InModuleScope 'PSDeploy' {
     $PSVersion = $PSVersionTable.PSVersion.Major
-    $ProjectRoot = $ENV:BHProjectPath
 
     $Verbose = @{}
     if($ENV:BHBranchName -notlike "mainline" -or $env:BHCommitMessage -match "!verbose")
