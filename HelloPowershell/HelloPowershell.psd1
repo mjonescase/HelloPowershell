@@ -59,7 +59,7 @@
 
     # Functions to export from this module
     FunctionsToExport = @(
-        'Get-Message'   
+        'Get-Greeting'   
     )
 
     # FunctionsToExport = '*'
