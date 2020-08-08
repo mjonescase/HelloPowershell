@@ -19,8 +19,8 @@ InModuleScope 'PSDeploy' {
         Context 'Gets Greeting' {
 
             It 'Gets the greeting' {
-                $ENV:BHProjectPath | Should Be "C:\Users\micha\git\HelloPowershell"
-                $ENV:BHProjectName | Should Be "HelloPowershell"
+                # $ENV:BHProjectPath | Should Be "C:\Users\micha\git\HelloPowershell"
+                # $ENV:BHProjectName | Should Be "HelloPowershell"
                 Import-Module (Join-Path $ENV:BHProjectPath $ENV:BHProjectName) -Force
                 Get-Greeting | Should Be "Hello World!"
             }
