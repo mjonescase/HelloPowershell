@@ -18,7 +18,7 @@
                             </ListItem>
                             <ListItem>
                                 <PropertyName>DeploymentOptions</PropertyName>
-                            </ListITem>
+                            </ListItem>
                             <ListItem>
                                 <Label>Targets</Label>
                                 <ScriptBlock>Try { ($_.Targets | Out-String ).trimend("`n")} Catch {$_.Targets} </ScriptBlock>
