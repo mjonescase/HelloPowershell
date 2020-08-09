@@ -59,7 +59,8 @@
 
     # Functions to export from this module
     FunctionsToExport = @(
-        'Get-Greeting'   
+        'Get-Greeting',
+        'Assert-PayingInFullMakesSense'
     )
 
     # FunctionsToExport = '*'
