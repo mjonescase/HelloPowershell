@@ -64,5 +64,41 @@ Function Assert-PayingInFullMakesSense {
         [decimal]$RateOfInflation = 0.03
     )
 
-    return $false
+    # BEGIN OPPORTUNITY COST
+    # this is the percentage of the original home value
+    # still left to be paid down.
+    $AmortizationPercentageTable = @{
+        5=0.7
+        10=0.6
+        15=0.48
+        20=0.34
+        25=0.18
+        30=0.0
+    }
+    [int]$HouseValueBefore = 3 * [Math]::Pow(10, 5)
+    [decimal]$HouseValueAfter = $HouseValueBefore * [Math]::Pow(1 + $RateOfInflation, $NumberOfYears)
+    [decimal]$AmountLeftOnLoan = $HouseValueBefore * $AmortizationPercentageTable[$NumberOfYears]
+    [decimal]$StockValueAfter = 0.8 * $HouseValueBefore * [Math]::Pow(1 + $StockMarketPerformance, $NumberOfYears)
+
+    [decimal]$OpportunityCost = $HouseValueAfter - $AmountLeftOnLoan + $StockValueAfter
+    # Write-Output "Net worth with 20% down: $($OpportunityCost)"
+
+    # END OPPORTUNITY COST
+    # BEGIN BUY OUTRIGHT
+    [decimal]$MonthlyLoanPayment = $HouseValueBefore / ( 75 * [Math]::Pow(10, 3)) * 270
+
+    # TODO this is a really rough estimate.
+    [decimal]$HouseValueDiscounts = $HouseValueBefore * ( $Discount + 0.03 ) # assuming 3% off for loan origination fees.
+    [decimal]$StockMarketGainsOnDiscounts = $HouseValueDiscounts * [Math]::Pow(1 + $StockMarketPerformance, $NumberOfYears)
+    [decimal]$LesserStockValueAfter = $MonthlyLoanPayment * [Math]::Pow(1 + $StockMarketPerformance, $NumberOfYears / 2)
+    
+    [decimal]$NetWorth = $HouseValueAfter + $StockMarketGainsOnDiscounts + $LesserStockValueAfter
+    # Write-Output "Net worth buying outright: $($NetWorth)"
+
+    [PayInFullResult]$Result = New-Object PayInFullResult
+    $Result.PayInFullNetWorth = $NetWorth
+    $Result.MortgageNetWorth = $OpportunityCost
+    $Result.DoesPayInFullMakeSense = $NetWorth -gt $OpportunityCost
+
+    return $Result
 }

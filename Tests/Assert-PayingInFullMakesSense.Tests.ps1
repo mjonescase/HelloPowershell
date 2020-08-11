@@ -18,7 +18,8 @@ InModuleScope 'HelloPowershell' {
     Describe "Assert-PayingInFullMakesSense PS$PSVersion" {
         Context 'the answer is False' {
             It 'Returns False' {
-                Assert-PayingInFullMakesSense -Discount 0.1 | Should Be $false
+                $Result = Assert-PayingInFullMakesSense -Discount 0.1
+                $Result.DoesPayInFullMakeSense | Should Be $false
             }
         }
     }
