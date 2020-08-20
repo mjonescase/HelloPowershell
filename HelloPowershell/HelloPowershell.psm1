@@ -5,6 +5,11 @@
     Where-Object {$_.PSIsContainer} |
     Select-Object -ExpandProperty FullName
 
+if ($PrivateModules.Count -eq 0)
+{
+    Write-Error "Didn't find any private modules"
+}
+
 # Dot source the files
 Foreach($import in @($Public + $Private))
 {
