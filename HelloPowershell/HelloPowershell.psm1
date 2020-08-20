@@ -2,8 +2,8 @@
 [System.Object[]] $Public = Get-ChildItem $(Join-Path HelloPowershell Public) -Filter *.ps1
 [System.Object[]] $Private = Get-ChildItem $(Join-Path HelloPowershell Private) -Filter *.ps1
 
-"`n`tPrivate file names: $Private"
-"`n`tPublic file names: $Public"
+Write-Output "`n`tPrivate file names: $Private"
+Write-Output "`n`tPublic file names: $Public"
 
 # Dot source the files
 Foreach($import in @($Public + $Private))
