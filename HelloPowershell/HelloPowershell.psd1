@@ -58,10 +58,7 @@
     # NestedModules = @()
 
     # Functions to export from this module
-    FunctionsToExport = @(
-        'Get-Greeting',
-        'Assert-PayingInFullMakesSense'
-    )
+    FunctionsToExport = @()
 
     # FunctionsToExport = '*'
 
