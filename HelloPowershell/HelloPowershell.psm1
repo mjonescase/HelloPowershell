@@ -5,9 +5,9 @@
     Where-Object {$_.PSIsContainer} |
     Select-Object -ExpandProperty FullName
 
-if ($PrivateModules.Count -eq 0)
+if ($Private.Count -eq 0)
 {
-    Write-Error "Didn't find any private modules"
+    Write-Error "Didn't find any private .ps1 files. Looked in $(Join-Path HelloPowershell Private)"
 }
 
 # Dot source the files
