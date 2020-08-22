@@ -10,7 +10,7 @@ if(-not (Get-Module -ListAvailable PSDepend))
 }
 
 Import-Module PSDepend
-$null = Invoke-PSDepend -Path "$PSScriptRoot\build.requirements.psd1" -Install -Import -Force
+# $null = Invoke-PSDepend -Path "$PSScriptRoot\build.requirements.psd1" -Install -Import -Force
 
 # Set-BuildEnvironment -Force
 
