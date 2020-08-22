@@ -1,0 +1,16 @@
+version: 2.1
+
+orbs:
+    windows: circleci/windows@2.4.0
+
+jobs:
+    install-dependencies:
+        executor: windows/default
+        steps:
+            - checkout
+            - run: .\Build\Start-Build.ps1
+
+workflows:
+    install:
+        jobs:
+            - install-dependencies
