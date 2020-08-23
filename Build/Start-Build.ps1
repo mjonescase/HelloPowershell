@@ -1,7 +1,10 @@
 param(
     $Task = 'Default',
-    $DependencyInstallDestination = ".PSDependModules"
+    $DependencyInstallDestination = ".PSDependModules",
+    [switch]$Local
 )
+
+Write-Output "Local is set to $Local"
 
 # create .PSDependModules if it doesn't exist
 if (Test-Path $DependencyInstallDestination -PathType Container)
@@ -17,14 +20,14 @@ if (Test-Path $DependencyInstallDestination -PathType Container)
 
 # dependencies
 Get-PackageProvider -Name NuGet -ForceBootstrap | Out-Null
-if(-not (Get-Module -ListAvailable PSDepend))
+if(( -not (Get-Module -ListAvailable PSDepend )) -or $Local)
 {
     & (Resolve-Path "$PSScriptRoot\helpers\Install-PSDepend.ps1") -Path $DependencyInstallDestination
 }
 
 Import-Module .\.PSDependModules\PSDepend -Verbose
 
-# $null = Invoke-PSDepend -Path "$PSScriptRoot\build.requirements.psd1" -Install -Import -Force
+$null = Invoke-PSDepend -Path "$PSScriptRoot\build.requirements.psd1" -Install -Import -Force
 
 # Set-BuildEnvironment -Force
 
