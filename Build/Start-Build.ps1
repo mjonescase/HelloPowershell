@@ -22,7 +22,8 @@ if(-not (Get-Module -ListAvailable PSDepend))
     & (Resolve-Path "$PSScriptRoot\helpers\Install-PSDepend.ps1") -Path $DependencyInstallDestination
 }
 
-Import-Module PSDepend 
+Import-Module .\PSDependModules\PSDepend -Verbose
+
 # $null = Invoke-PSDepend -Path "$PSScriptRoot\build.requirements.psd1" -Install -Import -Force
 
 # Set-BuildEnvironment -Force
