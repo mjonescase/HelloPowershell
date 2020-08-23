@@ -21,7 +21,6 @@ Foreach($import in @($Public + $Private))
     }
 }
 
-
 # Load up dependency modules
 foreach($Module in $PrivateModules)
 {
