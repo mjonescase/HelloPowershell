@@ -1,9 +1,14 @@
 # Get public and private function definition files.
+
+Write-Output "Private Directory location: $(Resolve-Path $(Join-Path .\HelloPowershell Private))"
+
 [System.Object[]] $Public = Get-ChildItem $(Join-Path HelloPowershell Public) -Filter *.ps1
 [System.Object[]] $Private = Get-ChildItem $(Join-Path HelloPowershell Private) -Filter *.ps1
 [string[]]$PrivateModules = Get-ChildItem $PSScriptRoot\Private -ErrorAction SilentlyContinue |
     Where-Object {$_.PSIsContainer} |
     Select-Object -ExpandProperty FullName
+
+
 
 if ($Private.Count -eq 0)
 {
