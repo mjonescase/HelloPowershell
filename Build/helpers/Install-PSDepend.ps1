@@ -34,23 +34,21 @@ $ExistingProgressPreference = "$ProgressPreference"
 $ProgressPreference = 'SilentlyContinue'
 $NugetFilePath = Join-Path $NugetPath "nuget.exe"
 try {
-    # Bootstrap nuget if we don't have it
-    if(-not ((Get-Command 'nuget' -ErrorAction SilentlyContinue).Path)) {
-        If (-not (Test-Path $NugetPath -PathType Container) )
+    # Bootstrap nuget
+    If (-not (Test-Path $NugetPath -PathType Container) )
+    {
+        If (Test-Path $NugetPath -PathType Leaf)
         {
-            If (Test-Path $NugetPath -PathType Leaf)
-            {
-                Write-Error "$NugetPath already exists as a file. Could not create directory."
-            }
-
-            New-Item -ItemType Container -Path $NugetPath
+            Write-Error "$NugetPath already exists as a file. Could not create directory."
         }
 
-        if(-not (Test-Path $NugetFilePath)) {
-            Invoke-WebRequest -uri 'https://dist.nuget.org/win-x86-commandline/latest/nuget.exe' -OutFile $NugetFilePath
-        }
+        New-Item -ItemType Container -Path $NugetPath
     }
 
+    if(-not (Test-Path $NugetFilePath)) {
+        Invoke-WebRequest -uri 'https://dist.nuget.org/win-x86-commandline/latest/nuget.exe' -OutFile $NugetFilePath
+    }
+    
     # Bootstrap PSDepend, re-use nuget.exe for the module
     if($path) { $null = mkdir $path -Force }
     $NugetParams = 'install', 'PSDepend', '-Source', 'https://www.powershellgallery.com/api/v2',
