@@ -63,7 +63,7 @@ Function Assert-PayingInFullMakesSense {
         )]
         [decimal]$RateOfInflation = 0.03
     )
-
+    <#
     # BEGIN OPPORTUNITY COST
     # this is the percentage of the original home value
     # still left to be paid down.
@@ -94,11 +94,11 @@ Function Assert-PayingInFullMakesSense {
     
     [decimal]$NetWorth = $HouseValueAfter + $StockMarketGainsOnDiscounts + $LesserStockValueAfter
     # Write-Output "Net worth buying outright: $($NetWorth)"
-
+    #>
     [PayInFullResult]$Result = New-Object PayInFullResult
-    $Result.PayInFullNetWorth = $NetWorth
-    $Result.MortgageNetWorth = $OpportunityCost
-    $Result.DoesPayInFullMakeSense = $NetWorth -gt $OpportunityCost
+    $Result.PayInFullNetWorth = 9000 # $NetWorth
+    $Result.MortgageNetWorth = 5000 # $OpportunityCost
+    $Result.DoesPayInFullMakeSense = $false #$NetWorth -gt $OpportunityCost
 
     return $Result
 }
