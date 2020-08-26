@@ -1,18 +1,17 @@
 # Get public and private function definition files.
 
-Write-Output "Private Directory location: $(Resolve-Path $(Join-Path .\HelloPowershell Private))"
+$PrivateDir = $(Resolve-Path $(Join-Path .\HelloPowershell Private)).Path
+$PublicDir = $(Resolve-Path $(Join-Path .\HelloPowershell Public)).Path
 
-[System.Object[]] $Public = Get-ChildItem $(Join-Path HelloPowershell Public) -Filter *.ps1
-[System.Object[]] $Private = Get-ChildItem $(Join-Path HelloPowershell Private) -Filter *.ps1
+[System.Object[]] $Public = Get-ChildItem $PublicDir -Filter *.ps1
+[System.Object[]] $Private = Get-ChildItem $PrivateDir -Filter *.ps1
 [string[]]$PrivateModules = Get-ChildItem $PSScriptRoot\Private -ErrorAction SilentlyContinue |
     Where-Object {$_.PSIsContainer} |
     Select-Object -ExpandProperty FullName
 
-
-
 if ($Private.Count -eq 0)
 {
-    Write-Error "Didn't find any private .ps1 files. Looked in $(Resolve-Path $(Join-Path HelloPowershell Private))"
+    Write-Error "Didn't find any private .ps1 files. Looked in $PrivateDir"
 }
 
 # Dot source the files
