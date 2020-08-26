@@ -46,6 +46,7 @@ try {
     }
 
     if(-not (Test-Path $NugetFilePath)) {
+        Write-Output "Installing NuGet to $NugetFilePath"
         Invoke-WebRequest -uri 'https://dist.nuget.org/win-x86-commandline/latest/nuget.exe' -OutFile $NugetFilePath
     }
     
