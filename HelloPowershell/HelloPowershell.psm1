@@ -12,7 +12,7 @@ Write-Output "Private Directory location: $(Resolve-Path $(Join-Path .\HelloPowe
 
 if ($Private.Count -eq 0)
 {
-    Write-Error "Didn't find any private .ps1 files. Looked in $(Join-Path HelloPowershell Private)"
+    Write-Error "Didn't find any private .ps1 files. Looked in $(Resolve-Path $(Join-Path HelloPowershell Private))"
 }
 
 # Dot source the files
