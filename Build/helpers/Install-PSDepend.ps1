@@ -7,11 +7,13 @@
 
     Why? No reliance on PowerShellGallery
 
-     * Downloads nuget to your ~\ home directory
+     * Downloads nuget to $NugetPath
      * Creates $Path (and full path to it)
      * Downloads module to $Path\PSDepend
-     * Moves nuget.exe to $Path\PSDepend (skips nuget bootstrap on initial PSDepend import)
      
+.PARAMETER NugetPath
+    Desired nuget.exe install location
+
 .PARAMETER Path
     Module path to install PSDepend
 
@@ -24,16 +26,28 @@
 #>
 [cmdletbinding()]
 param(
-    [string]$Path = $($env:PSModulePath.Split(";")[0])
+    [string]$Path = $($env:PSModulePath.Split(";")[0]),
+    [string]$NugetPath
 )
+
 $ExistingProgressPreference = "$ProgressPreference"
 $ProgressPreference = 'SilentlyContinue'
+$NugetFilePath = Join-Path $NugetPath "nuget.exe"
 try {
     # Bootstrap nuget if we don't have it
-    if(-not ($NugetPath = (Get-Command 'nuget.exe' -ErrorAction SilentlyContinue).Path)) {
-        $NugetPath = Join-Path $ENV:USERPROFILE nuget.exe
-        if(-not (Test-Path $NugetPath)) {
-            Invoke-WebRequest -uri 'https://dist.nuget.org/win-x86-commandline/latest/nuget.exe' -OutFile $NugetPath
+    if(-not ((Get-Command 'nuget' -ErrorAction SilentlyContinue).Path)) {
+        If (-not (Test-Path $NugetPath -PathType Container) )
+        {
+            If (Test-Path $NugetPath -PathType Leaf)
+            {
+                Write-Error "$NugetPath already exists as a file. Could not create directory."
+            }
+
+            New-Item -ItemType Container -Path $NugetPath
+        }
+
+        if(-not (Test-Path $NugetFilePath)) {
+            Invoke-WebRequest -uri 'https://dist.nuget.org/win-x86-commandline/latest/nuget.exe' -OutFile $NugetFilePath
         }
     }
 
@@ -41,8 +55,7 @@ try {
     if($path) { $null = mkdir $path -Force }
     $NugetParams = 'install', 'PSDepend', '-Source', 'https://www.powershellgallery.com/api/v2',
                 '-ExcludeVersion', '-NonInteractive', '-OutputDirectory', $Path
-    & $NugetPath @NugetParams
-    Move-Item -Path $NugetPath -Destination "$(Join-Path $Path PSDepend)\nuget.exe" -Force
+    & $NugetFilePath @NugetParams
 }
 finally {
     $ProgressPreference = $ExistingProgressPreference
