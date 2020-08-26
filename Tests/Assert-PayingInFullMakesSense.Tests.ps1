@@ -19,7 +19,7 @@ InModuleScope 'HelloPowershell' {
         Context 'the answer is False' {
 
             It 'Returns False' {
-                $Result = Get-Greeting # Assert-PayingInFullMakesSense -Discount 0.1
+                # $Result = Get-Greeting # Assert-PayingInFullMakesSense -Discount 0.1
                 # $Result.DoesPayInFullMakeSense | Should Be $false
                 Get-Greeting | Should Be "Hello World!"
             }
