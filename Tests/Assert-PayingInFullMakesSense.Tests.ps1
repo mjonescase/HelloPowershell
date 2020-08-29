@@ -38,10 +38,10 @@ InModuleScope 'HelloPowershell' {
     $PSVersion = $PSVersionTable.PSVersion.Major
 
     $Verbose = @{}
-    if($ENV:BHBranchName -notlike "mainline" -or $env:BHCommitMessage -match "!verbose")
-    {
-        $Verbose.Add("Verbose",$True)
-    }
+    # if($ENV:BHBranchName -notlike "mainline" -or $env:BHCommitMessage -match "!verbose")
+    # {
+    $Verbose.Add("Verbose",$True)
+    # }
 
     Describe "Get-Greeting PS$PSVersion" {
         Context 'Gets Greeting' {
