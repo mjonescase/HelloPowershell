@@ -43,11 +43,11 @@ InModuleScope 'HelloPowershell' {
     $Verbose.Add("Verbose",$True)
     # }
 
-    Describe "Get-Greeting PS$PSVersion" {
-        Context 'Gets Greeting' {
-
-            It 'Gets the greeting' {
-                Get-Greeting | Should Be "Hello World!"
+    Describe "Pay In Full PS$PSVersion" {
+        Context 'Pays In Full' {
+            It 'Returns False if paying in full makes no sense' {
+                # Get-Greeting | Should Be "Hello World!"
+                $True | Should Be $True
             }
         }
     }
