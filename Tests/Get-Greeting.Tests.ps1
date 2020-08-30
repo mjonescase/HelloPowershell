@@ -17,12 +17,20 @@ InModuleScope 'HelloPowershell' {
     }
 
     Describe "Get-Greeting PS$PSVersion" {
-        Context 'This test will fail' {
-            It 'Fails' {
-                $True | Should Be $False
+        try {
+            Context 'This test will fail' {
+                It 'Fails' {
+                    $True | Should Be $False
+                }
             }
+        }          
+        catch [System.ComponentModel.Win32Exception]{
+            # do nothing, proceed to the next test
         }
-        
+        catch [System.Management.Automation.Host.HostException]{
+            # do nothing, proceed to the next test
+        }
+
         Context 'Gets Greeting' {
 
             It 'Gets the greeting' {
