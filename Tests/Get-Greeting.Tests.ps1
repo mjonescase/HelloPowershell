@@ -18,8 +18,9 @@ InModuleScope 'HelloPowershell' {
 
     Describe "Get-Greeting PS$PSVersion" {
         try {
-            Context 'This test does nothing' {
-                It 'Does nothing' {
+            Context 'This test will fail' {
+                It 'Fails' {
+                    $True | Should Be $False
                 }
             }
         }          
