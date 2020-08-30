@@ -16,17 +16,10 @@ InModuleScope 'HelloPowershell' {
     }
 
     Describe "Assert-PayingInFullMakesSense PS$PSVersion" {
-        Context 'This test will fail' {
+
+        Context 'This test will fail 0' {
             It 'Fails' {
-                try {
-                    $True | Should Be $False
-                }
-                catch [System.ComponentModel.Win32Exception]{
-                    # do nothing, proceed to the next test
-                }
-                catch [System.Management.Automation.Host.HostException]{
-                    # do nothing, proceed to the next test
-                }
+                $True | Should Be $False
             }
         }
 
@@ -35,6 +28,12 @@ InModuleScope 'HelloPowershell' {
                 $Result = Assert-PayingInFullMakesSense -Discount 0.1
                 $Result.DoesPayInFullMakeSense | Should Be $false
                 
+            }
+        }
+
+        Context 'This test will fail 1' {
+            It 'Fails' {
+                $True | Should Be $False
             }
         }
 
