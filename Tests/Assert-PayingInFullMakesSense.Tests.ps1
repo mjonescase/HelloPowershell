@@ -25,7 +25,7 @@ InModuleScope 'HelloPowershell' {
             }
         }
     }
-} #>if(-not $ENV:BHProjectPath)
+}if(-not $ENV:BHProjectPath)
 {
     Set-BuildEnvironment -Path $PSScriptRoot\.. -Force
 }
@@ -33,15 +33,14 @@ InModuleScope 'HelloPowershell' {
 Remove-Module $ENV:BHProjectName -ErrorAction SilentlyContinue
 Import-Module (Join-Path $ENV:BHProjectPath $ENV:BHProjectName) -Force
 
-
+#>
 InModuleScope 'HelloPowershell' {
     $PSVersion = $PSVersionTable.PSVersion.Major
 
+    <#
     $Verbose = @{}
-    # if($ENV:BHBranchName -notlike "mainline" -or $env:BHCommitMessage -match "!verbose")
-    # {
     $Verbose.Add("Verbose",$True)
-    # }
+    #>
 
     Describe "Pay In Full PS$PSVersion" {
         Context 'Pays In Full' {
