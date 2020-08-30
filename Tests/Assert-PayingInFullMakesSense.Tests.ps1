@@ -37,5 +37,12 @@ InModuleScope 'HelloPowershell' {
                 
             }
         }
+
+        Context 'the answer is also False' {
+            It 'Returns False also' {
+                $Result = Assert-PayingInFullMakesSense -Discount 0.99
+                $Result.DoesPayInFullMakeSense | Should Be $False
+            }
+        }
     }
 }
