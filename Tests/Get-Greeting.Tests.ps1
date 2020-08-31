@@ -11,12 +11,6 @@ InModuleScope 'HelloPowershell' {
     $PSVersion = $PSVersionTable.PSVersion.Major
 
     Describe "Get-Greeting PS$PSVersion" {
-        Context 'This test will fail 2' {
-            It 'Fails' {
-                $True | Should -Be $False
-            }
-        }
-
         Context 'Gets Greeting' {
             It 'Gets the greeting' {
                 Get-Greeting | Should -Be "Hello World!"
