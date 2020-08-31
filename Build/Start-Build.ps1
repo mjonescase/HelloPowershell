@@ -41,7 +41,5 @@ $null = Invoke-PSDepend -Path "$PSScriptRoot\build.requirements.psd1" -Install -
 
 Set-BuildEnvironment -Force
 
-# working up to this point
-
 Invoke-psake $PSScriptRoot\psake.ps1 -taskList $Task -nologo
 exit ( [int]( -not $psake.build_success ) )

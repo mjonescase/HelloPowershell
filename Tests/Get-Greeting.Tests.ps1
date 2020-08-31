@@ -17,13 +17,19 @@ InModuleScope 'HelloPowershell' {
     }
 
     Describe "Get-Greeting PS$PSVersion" {
-        Context 'Gets Greeting' {
+        Context 'This test will fail 2' {
             It 'Fails' {
                 $True | Should Be $False
             }
+        }
 
+        Context 'Gets Greeting' {
             It 'Gets the greeting' {
                 Get-Greeting | Should Be "Hello World!"
+            }
+
+            It 'Tests something else in the same context' {
+                $True | Should Be $True
             }
         }
     }
