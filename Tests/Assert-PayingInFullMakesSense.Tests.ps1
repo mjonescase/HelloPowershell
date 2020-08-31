@@ -19,28 +19,28 @@ InModuleScope 'HelloPowershell' {
 
         Context 'This test will fail 0' {
             It 'Fails' {
-                $True | Should Be $False
+                $True | Should -Be $False
             }
         }
 
         Context 'the answer is False' {
             It 'Returns False' {
                 $Result = Assert-PayingInFullMakesSense -Discount 0.1
-                $Result.DoesPayInFullMakeSense | Should Be $false
+                $Result.DoesPayInFullMakeSense | Should -Be $false
                 
             }
         }
 
         Context 'This test will fail 1' {
             It 'Fails' {
-                $True | Should Be $False
+                $True | Should -Be $False
             }
         }
 
         Context 'the answer is also False' {
             It 'Returns False also' {
                 $Result = Assert-PayingInFullMakesSense -Discount 0.99
-                $Result.DoesPayInFullMakeSense | Should Be $False
+                $Result.DoesPayInFullMakeSense | Should -Be $False
             }
         }
     }

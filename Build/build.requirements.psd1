@@ -21,7 +21,6 @@
 
     'Pester' = @{
         DependencyType = 'PSGalleryNuget'
-        Version = '3.4.6'
         Force = $true
     }
 }
