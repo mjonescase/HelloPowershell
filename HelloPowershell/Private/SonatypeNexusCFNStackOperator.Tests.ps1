@@ -4,21 +4,21 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
 
 $PSVersion = $PSVersionTable.PSVersion.Major
 
-# Need to set up some mocks here
-[System.Management.Automation.PSModuleInfo]$MockModule =`
-    New-Module {
-        function New-CFNStack {
-
-        }
-    }
-
-$Creator = [SonatypeNexusCFNStackOperator]::new()
-$Creator.CFNModule = $MockModule
-
 Describe "SonatypeNexusCFNStackCreator PS$PSVersion" {
+
+    # Need to set up some mocks here
+    [System.Management.Automation.PSModuleInfo]$MockModule =`
+        New-Module {
+            Mock New-CFNStack { "Hello" }
+        }
+
+    $Creator = [SonatypeNexusCFNStackOperator]::new()
+    $Creator.CFNModule = $MockModule
+
     Context "New-CFNStack" {
         It "Creates a stack" {
             $Creator.NewCFNStack()
+            # Should -Invoke $MockModule.ExportedFunctions["New-CFNStack"] -Exactly 1
         }
     }
 }
