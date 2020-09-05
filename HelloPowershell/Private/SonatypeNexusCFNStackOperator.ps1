@@ -6,15 +6,7 @@ class SonatypeNexusCFNStackOperator {
     {
         return $this.CFNModule.Invoke({
             Param([string]$Region, [string]$StackName, [string]$TemplateURL)
-            New-CFNStack -Region $Region -StackName $StackName -TemplateURL $TemplateURL
-            # New-CFNStack -Region $that.GetRegion() -StackName $that.GetStackName() -TemplateURL $that.GetTemplateURL()
-            # Assert ($that -ne $null) "That is null"
-            <# $Params = @{
-                Region = $this.GetRegion()
-                StackName = $this.GetStackName()
-                TemplateURL = $this.GetTemplateURL()
-            }
-            New-CFNStack @Params #>
+            New-SomethingElse -Region $Region -StackName $StackName -TemplateURL $TemplateURL
         }, $this.GetRegion(),$this.GetStackName(),$this.GetTemplateURL())
     }
 

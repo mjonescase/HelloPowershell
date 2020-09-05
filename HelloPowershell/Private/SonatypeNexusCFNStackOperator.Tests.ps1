@@ -10,6 +10,7 @@ Describe "SonatypeNexusCFNStackCreator PS$PSVersion" {
     [System.Management.Automation.PSModuleInfo]$MockModule =`
         New-Module {
             Mock New-CFNStack { "Hello" }
+            function New-SomethingElse { "Something Else" }
         }
 
     $Creator = [SonatypeNexusCFNStackOperator]::new()
