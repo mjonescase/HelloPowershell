@@ -4,17 +4,18 @@ class SonatypeNexusCFNStackOperator {
     # https://github.com/aws/aws-tools-for-powershell/blob/master/modules/AWSPowerShell/Cmdlets/CloudFormation/Basic/New-CFNStack-Cmdlet.cs#L38
     [Amazon.CloudFormation.Model.CreateStackResponse] NewCFNStack()
     {
-        Assert ($this.CFNModule -ne $null) "this.CFNModule is null"
-        $that = $this
         return $this.CFNModule.Invoke({
-            Assert ($that -eq $this) "That was not this"
+            Param([string]$Region, [string]$StackName, [string]$TemplateURL)
+            New-CFNStack -Region $Region -StackName $StackName -TemplateURL $TemplateURL
+            # New-CFNStack -Region $that.GetRegion() -StackName $that.GetStackName() -TemplateURL $that.GetTemplateURL()
+            # Assert ($that -ne $null) "That is null"
             <# $Params = @{
                 Region = $this.GetRegion()
                 StackName = $this.GetStackName()
                 TemplateURL = $this.GetTemplateURL()
             }
             New-CFNStack @Params #>
-        })
+        }, $this.GetRegion(),$this.GetStackName(),$this.GetTemplateURL())
     }
 
     [string] GetRegion()

@@ -8,7 +8,7 @@ $PSVersion = $PSVersionTable.PSVersion.Major
 [System.Management.Automation.PSModuleInfo]$MockModule =`
     New-Module {
         function New-CFNStack {
-            
+
         }
     }
 
